@@ -1,0 +1,264 @@
+version: "3"
+
+services:
+  C-Gobang-portainer:
+    container_name: C-Gobang-portainer
+    image: portainer/portainer-ce:2.14.2
+    ports:
+      - "8000:8000"
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /data/C-Gobang/dockerVolumes/portainer/data:/data
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.2
+
+  C-Gobang-mysql-master:
+    container_name: C-Gobang-mysql-master
+    image: mysql:8.0.30
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=518315
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.3
+    volumes:
+      - /data/C-Gobang/dockerVolumes/mysql-master/conf.d:/etc/mysql/conf.d
+      - /data/C-Gobang/dockerVolumes/mysql-master/data:/var/lib/mysql
+
+  C-Gobang-mysql-slave:
+    container_name: C-Gobang-mysql-slave
+    image: mysql:8.0.30
+    ports:
+      - "3308:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=518315
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.4
+    volumes:
+      - /data/C-Gobang/dockerVolumes/mysql-slave/conf.d:/etc/mysql/conf.d
+      - /data/C-Gobang/dockerVolumes/mysql-slave/data:/var/lib/mysql
+    depends_on:
+      - C-Gobang-mysql-master
+
+  C-Gobang-redis100:
+    container_name: C-Gobang-redis100
+    image: redis:7.0.4
+    ports:
+      - "6380:6379"
+    volumes:
+      - /data/C-Gobang/dockerVolumes/redis100/conf:/usr/local/etc/redis
+      - /data/C-Gobang/dockerVolumes/redis100/data:/data
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.10
+    command: "redis-server /usr/local/etc/redis/redis100.conf"
+
+  C-Gobang-redis101:
+    container_name: C-Gobang-redis101
+    image: redis:7.0.4
+    ports:
+      - "6381:6379"
+    volumes:
+      - /data/C-Gobang/dockerVolumes/redis101/conf:/usr/local/etc/redis
+      - /data/C-Gobang/dockerVolumes/redis101/data:/data
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.11
+    command: "redis-server /usr/local/etc/redis/redis101.conf"
+
+  C-Gobang-redis102:
+    container_name: C-Gobang-redis102
+    image: redis:7.0.4
+    ports:
+      - "6382:6379"
+    volumes:
+      - /data/C-Gobang/dockerVolumes/redis102/conf:/usr/local/etc/redis
+      - /data/C-Gobang/dockerVolumes/redis102/data:/data
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.12
+    command: "redis-server /usr/local/etc/redis/redis102.conf"
+
+  C-Gobang-redis103:
+    container_name: C-Gobang-redis103
+    image: redis:7.0.4
+    ports:
+      - "6383:6379"
+    volumes:
+      - /data/C-Gobang/dockerVolumes/redis103/conf:/usr/local/etc/redis
+      - /data/C-Gobang/dockerVolumes/redis103/data:/data
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.13
+    command: "redis-server /usr/local/etc/redis/redis103.conf"
+
+  C-Gobang-redis104:
+    container_name: C-Gobang-redis104
+    image: redis:7.0.4
+    ports:
+      - "6384:6379"
+    volumes:
+      - /data/C-Gobang/dockerVolumes/redis104/conf:/usr/local/etc/redis
+      - /data/C-Gobang/dockerVolumes/redis104/data:/data
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.14
+    command: "redis-server /usr/local/etc/redis/redis104.conf"
+
+  C-Gobang-redis105:
+    container_name: C-Gobang-redis105
+    image: redis:7.0.4
+    ports:
+      - "6385:6379"
+    volumes:
+      - /data/C-Gobang/dockerVolumes/redis105/conf:/usr/local/etc/redis
+      - /data/C-Gobang/dockerVolumes/redis105/data:/data
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.15
+    command: "redis-server /usr/local/etc/redis/redis105.conf"
+
+  C-Gobang-zookeeper:
+    container_name: C-Gobang-zookeeper
+    image: bitnami/zookeeper:3.8.0
+    user: "root"
+    ports:
+      - "2181:2181"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+      - ZOO_SERVER_ID=0
+    volumes:
+      - /data/C-Gobang/dockerVolumes/zookeeper:/bitnami/zookeeper
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.16
+
+  C-Gobang-kafka100:
+    container_name: C-Gobang_kafka100
+    image: bitnami/kafka:3.2.1
+    user: "root"
+    ports:
+      - "9092:9092"
+    volumes:
+      - /data/C-Gobang/dockerVolumes/kafka100:/bitnami/kafka
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_BROKER_ID=0
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=C-Gobang-zookeeper:2181
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://C-Gobang-kafka100:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://172.31.0.20:9092
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.20
+    depends_on:
+      - C-Gobang-zookeeper
+
+  C-Gobang-kafka101:
+    container_name: C-Gobang_kafka101
+    image: bitnami/kafka:3.2.1
+    user: "root"
+    ports:
+      - "9093:9092"
+    volumes:
+      - /data/C-Gobang/dockerVolumes/kafka101:/bitnami/kafka
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_BROKER_ID=1
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=C-Gobang-zookeeper:2181
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://C-Gobang-kafka101:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://172.31.0.21:9092
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.21
+    depends_on:
+      - C-Gobang-zookeeper
+
+  C-Gobang-kafka102:
+    container_name: C-Gobang_kafka102
+    image: bitnami/kafka:3.2.1
+    user: "root"
+    ports:
+      - "9094:9092"
+    volumes:
+      - /data/C-Gobang/dockerVolumes/kafka102:/bitnami/kafka
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_BROKER_ID=2
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=C-Gobang-zookeeper:2181
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://C-Gobang-kafka102:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://172.31.0.22:9092
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.22
+    depends_on:
+      - C-Gobang-zookeeper
+
+  C-Gobang-kafdrop:
+    container_name: C-Gobang-kafdrop
+    image: obsidiandynamics/kafdrop:3.30.0
+    ports:
+      - "9000:9000"
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.23
+    environment:
+      KAFKA_BROKERCONNECT: PLAINTEXT://C-Gobang-kafka100:9092,PLAINTEXT://C-Gobang-kafka101:9092,PLAINTEXT://C-Gobang-kafka102:9092
+      JVM_OPTS: "-Xms32M -Xmx64M"
+    depends_on:
+      - C-Gobang-kafka100
+      - C-Gobang-kafka101
+      - C-Gobang-kafka102
+
+  C-Gobang-logCollector:
+    container_name: C-Gobang-logCollector
+    image: heejinzzz/c-gobang-logcollector:v0.0.2
+    volumes:
+      - /data/C-Gobang/logs:/data/logs
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.24
+    depends_on:
+      - C-Gobang-kafka100
+      - C-Gobang-kafka101
+      - C-Gobang-kafka102
+      - C-Gobang-redis100
+      - C-Gobang-redis101
+      - C-Gobang-redis102
+      - C-Gobang-redis103
+      - C-Gobang-redis104
+      - C-Gobang-redis105
+
+  C-Gobang-userManager:
+    container_name: C-Gobang-userManager
+    image: heejinzzz/c-gobang-usermanager:v0.0.1
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.25
+    ports:
+      - "10050:10050"
+    depends_on:
+      - C-Gobang-logCollector
+      - C-Gobang-mysql-slave
+
+  C-Gobang-gameManager:
+    container_name: C-Gobang-gameManager
+    image: heejinzzz/c-gobang-gamemanager:v0.0.1
+    networks:
+      C-Gobang:
+        ipv4_address: 172.31.0.26
+    ports:
+      - "10051:10051"
+    depends_on:
+      - C-Gobang-logCollector
+      - C-Gobang-mysql-slave
+
+networks:
+  C-Gobang:
+    ipam:
+      config:
+        - subnet: "172.31.0.0/24"
+          gateway: 172.31.0.1

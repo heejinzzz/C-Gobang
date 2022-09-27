@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+option go_package = "./proto;proto";
+
+service GameManager {
+  rpc RequireNewGame(RequireNewGameRequest) returns (RequireNewGameResponse) {};
+  rpc CancelRequireGame(CancelRequireGameRequest) returns (CancelRequireGameResponse) {};
+  rpc AcceptNewGame(AcceptNewGameRequest) returns (AcceptNewGameResponse) {};
+  rpc Shoot(ShootRequest) returns (ShootResponse) {};
+  rpc RequireFirstShoot(RequireFirstShootRequest) returns (RequireFirstShootResponse) {};
+  rpc InformTimeOut(InformTimeOutRequest) returns (InformTimeOutResponse) {};
+}
+
+message RequireNewGameRequest {
+  int32 UserID = 1;
+  int32 GameType = 2;
+}
+
+message RequireNewGameResponse {
+  string Message = 1;
+  int32 OpponentID = 2;
+}
+
+message CancelRequireGameRequest {
+  int32 UserID = 1;
+  int32 GameType = 2;
+}
+
+message CancelRequireGameResponse {
+  string Message = 1;
+}
+
+message AcceptNewGameRequest {
+  int32 UserID = 1;
+  int32 GameType = 2;
+  int32 OpponentID = 3;
+}
+
+message AcceptNewGameResponse {
+  string Message = 1;
+  int32 GameID = 2;
+  bool Black = 3;
+}
+
+message ShootRequest {
+  int32 GameID = 1;
+  int32 UserID = 2;
+  bool Black = 3;
+  int32 Row = 4;
+  int32 Col = 5;
+}
+
+message ShootResponse {
+  string Message = 1;
+  int32 Row = 2;
+  int32 Col = 3;
+  int32 Result = 4;
+}
+
+message RequireFirstShootRequest {
+  int32 GameID = 1;
+}
+
+message RequireFirstShootResponse {
+  string Message = 1;
+  int32 Row = 2;
+  int32 Col = 3;
+}
+
+message InformTimeOutRequest {
+  int32 GameID = 1;
+  int32 UserID = 2;
+  bool Black = 3;
+}
+
+message InformTimeOutResponse {
+  string Message = 1;
+}

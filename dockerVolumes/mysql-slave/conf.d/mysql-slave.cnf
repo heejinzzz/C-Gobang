@@ -1,0 +1,7 @@
+[mysqld]
+log-bin=mysql-bin
+relay_log=mysql-relay-bin
+server-id=2
+## 忽略表
+replicate-wild-ignore-table=mysql.*
+replicate-wild-ignore-table=sys.*

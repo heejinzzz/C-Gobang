@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+option go_package = "./UserManagerProto;UserManagerProto";
+
+service UserManager {
+  rpc UserRegister(UserRegisterRequest) returns (UserRegisterResponse) {}
+  rpc UserLogin(UserLoginRequest) returns (UserLoginResponse) {}
+  rpc UserLoginWithSessionID(UserLoginWithSessionIDRequest) returns(UserLoginWithSessionIDResponse) {}
+  rpc UserCoinAssetChange(UserCoinAssetChangeRequest) returns (UserCoinAssetChangeResponse) {}
+  rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse) {}
+  rpc GetTopPlayers(GetTopPlayersRequest) returns (GetTopPlayersResponse) {}
+}
+
+message UserRegisterRequest {
+  string Username = 1;
+  string Password = 2;
+}
+
+message UserRegisterResponse {
+  string Message = 1;
+  int32 UserID = 2;
+  string SessionID = 3;
+}
+
+message UserLoginRequest {
+  string Username = 1;
+  string Password = 2;
+}
+
+message UserLoginResponse {
+  string Message = 1;
+  int32 UserID = 2;
+  string SessionID = 3;
+}
+
+message UserLoginWithSessionIDRequest {
+  string SessionID = 1;
+}
+
+message UserLoginWithSessionIDResponse {
+  string Message = 1;
+  int32 UserID = 2;
+}
+
+message UserCoinAssetChangeRequest {
+  int32 UserID = 1;
+  int32 ChangeAmount = 2;
+}
+
+message UserCoinAssetChangeResponse {
+  string message = 1;
+}
+
+message GetUserInfoRequest {
+  int32 UserID = 1;
+}
+
+message GetUserInfoResponse {
+  string Message = 1;
+  int32 UserID = 2;
+  string Username = 3;
+  int32 WinCount = 4;
+  int32 LoseCount = 5;
+  int32 CoinAsset = 6;
+  int32 FightScore = 7;
+  string RegisterTime = 8;
+}
+
+message GetTopPlayersRequest {}
+
+message GetTopPlayersResponse {
+  string Message = 1;
+  repeated string TopPlayersInfo = 2;
+}
