@@ -146,11 +146,12 @@ services:
     volumes:
       - /data/C-Gobang/dockerVolumes/kafka100:/bitnami/kafka
     environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_CFG_BROKER_ID=0
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=C-Gobang-zookeeper:2181
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://C-Gobang-kafka100:9092
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://172.31.0.20:9092
+      ALLOW_PLAINTEXT_LISTENER: yes
+      KAFKA_CFG_BROKER_ID: 0
+      KAFKA_CFG_ZOOKEEPER_CONNECT: "C-Gobang-zookeeper:2181"
+      KAFKA_CFG_LISTENERS: "PLAINTEXT://C-Gobang-kafka100:9092"
+      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://172.31.0.20:9092"
+      KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
     networks:
       C-Gobang:
         ipv4_address: 172.31.0.20
@@ -166,11 +167,12 @@ services:
     volumes:
       - /data/C-Gobang/dockerVolumes/kafka101:/bitnami/kafka
     environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_CFG_BROKER_ID=1
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=C-Gobang-zookeeper:2181
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://C-Gobang-kafka101:9092
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://172.31.0.21:9092
+      ALLOW_PLAINTEXT_LISTENER: yes
+      KAFKA_CFG_BROKER_ID: 1
+      KAFKA_CFG_ZOOKEEPER_CONNECT: "C-Gobang-zookeeper:2181"
+      KAFKA_CFG_LISTENERS: "PLAINTEXT://C-Gobang-kafka101:9092"
+      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://172.31.0.21:9092"
+      KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
     networks:
       C-Gobang:
         ipv4_address: 172.31.0.21
@@ -186,11 +188,12 @@ services:
     volumes:
       - /data/C-Gobang/dockerVolumes/kafka102:/bitnami/kafka
     environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes
-      - KAFKA_CFG_BROKER_ID=2
-      - KAFKA_CFG_ZOOKEEPER_CONNECT=C-Gobang-zookeeper:2181
-      - KAFKA_CFG_LISTENERS=PLAINTEXT://C-Gobang-kafka102:9092
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://172.31.0.22:9092
+      ALLOW_PLAINTEXT_LISTENER: yes
+      KAFKA_CFG_BROKER_ID: 2
+      KAFKA_CFG_ZOOKEEPER_CONNECT: "C-Gobang-zookeeper:2181"
+      KAFKA_CFG_LISTENERS: "PLAINTEXT://C-Gobang-kafka102:9092"
+      KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://172.31.0.22:9092"
+      KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
     networks:
       C-Gobang:
         ipv4_address: 172.31.0.22
