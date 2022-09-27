@@ -21,6 +21,10 @@ func init() {
 	}
 }
 
+func createTopics() {
+
+}
+
 func main() {
 	collector.Wg.Add(3)
 	go collector.UserLogCollect()

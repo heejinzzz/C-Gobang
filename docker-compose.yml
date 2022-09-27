@@ -138,7 +138,7 @@ services:
         ipv4_address: 172.31.0.16
 
   C-Gobang-kafka100:
-    container_name: C-Gobang_kafka100
+    container_name: C-Gobang-kafka100
     image: bitnami/kafka:3.2.1
     user: "root"
     ports:
@@ -158,7 +158,7 @@ services:
       - C-Gobang-zookeeper
 
   C-Gobang-kafka101:
-    container_name: C-Gobang_kafka101
+    container_name: C-Gobang-kafka101
     image: bitnami/kafka:3.2.1
     user: "root"
     ports:
@@ -178,7 +178,7 @@ services:
       - C-Gobang-zookeeper
 
   C-Gobang-kafka102:
-    container_name: C-Gobang_kafka102
+    container_name: C-Gobang-kafka102
     image: bitnami/kafka:3.2.1
     user: "root"
     ports:
@@ -215,16 +215,14 @@ services:
 
   C-Gobang-logCollector:
     container_name: C-Gobang-logCollector
-    image: heejinzzz/c-gobang-logcollector:v0.0.2
+    image: heejinzzz/c-gobang-logcollector:v0.0.3
     volumes:
       - /data/C-Gobang/logs:/data/logs
     networks:
       C-Gobang:
         ipv4_address: 172.31.0.24
     depends_on:
-      - C-Gobang-kafka100
-      - C-Gobang-kafka101
-      - C-Gobang-kafka102
+      - C-Gobang-kafdrop
       - C-Gobang-redis100
       - C-Gobang-redis101
       - C-Gobang-redis102

@@ -2,6 +2,7 @@ package collector
 
 import (
 	"context"
+	"github.com/Shopify/sarama"
 	"github.com/go-redis/redis/v9"
 	"logCollector/errorRecorder"
 	"sync"
@@ -24,6 +25,9 @@ var redisClient *redis.ClusterClient
 var Wg sync.WaitGroup
 
 func init() {
+	// 创建 kafka topics
+	createTopics()
+
 	// 连接 redis 集群
 	opt := redis.ClusterOptions{
 		Addrs: redisClusterAddrs,
@@ -34,5 +38,28 @@ func init() {
 	if res != "PONG" {
 		errorRecorder.RecordError("[logCollector][connect redis cluster fail]")
 		panic("connect redis cluster fail")
+	}
+}
+
+func createTopics() {
+	admin, err := sarama.NewClusterAdmin(kafkaClusterAddrs, nil)
+	if err != nil {
+		panic(err)
+	}
+	topicDetail := &sarama.TopicDetail{
+		NumPartitions:     3,
+		ReplicationFactor: 3,
+	}
+	err = admin.CreateTopic(errorLogTopic, topicDetail, false)
+	if err != nil {
+		panic(err)
+	}
+	err = admin.CreateTopic(userLogTopic, topicDetail, false)
+	if err != nil {
+		panic(err)
+	}
+	err = admin.CreateTopic(gameLogTopic, topicDetail, false)
+	if err != nil {
+		panic(err)
 	}
 }
