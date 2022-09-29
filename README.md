@@ -41,7 +41,7 @@ userManager、gameManager 是基于 grpc 架构的微服务。
 ---
 ## 2. 编译生成 C-Gobang 客户端
 #### ( 1 ) 确保完成安装 fyne 所需的前置条件
-参考：[Prerequisites of installation fyne](https://developer.fyne.io/started/#prerequisites)
+参考：[Prerequisites of installing fyne](https://developer.fyne.io/started/#prerequisites)
 #### ( 2 ) 执行命令安装 fyne cmd 工具：
 ```shell
 go install fyne.io/fyne/v2/cmd/fyne@latest
