@@ -11,7 +11,7 @@
 ## 1. 部署 C-Gobang 服务端（On Linux）
 #### ( 1 ) 安装 docker engine
 参考：[Install Docker Engine](https://docs.docker.com/engine/install/)
-#### ( 2 ) 下载 docker-compose
+#### ( 2 ) 安装 docker-compose
 参考：[Install Compose](https://docs.docker.com/compose/install/linux/)（推荐安装版本：v2.7.0）
 #### ( 3 ) 执行命令：
 ```shell
