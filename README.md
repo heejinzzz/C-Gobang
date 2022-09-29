@@ -33,7 +33,7 @@ userManager、gameManager 是基于 grpc 架构的微服务。
 | 服务实例 | 登录用户名 | 登录密码 |
 | :---: | :---: | :---: |
 | mysql-master | root | 518315 |
-| mysql-master | root | 518315 |
+| mysql-slave | root | 518315 |
 | protainer | admin | 000000000000 |
 
 各个服务实例的端口号可以在 docker 或者 portainer 中查看端口映射。
