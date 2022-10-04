@@ -151,7 +151,7 @@ services:
       KAFKA_CFG_ZOOKEEPER_CONNECT: "C-Gobang-zookeeper:2181"
       KAFKA_CFG_LISTENERS: "PLAINTEXT://C-Gobang-kafka100:9092"
       KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://172.31.0.20:9092"
-      KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
+#       KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
     networks:
       C-Gobang:
         ipv4_address: 172.31.0.20
@@ -172,7 +172,7 @@ services:
       KAFKA_CFG_ZOOKEEPER_CONNECT: "C-Gobang-zookeeper:2181"
       KAFKA_CFG_LISTENERS: "PLAINTEXT://C-Gobang-kafka101:9092"
       KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://172.31.0.21:9092"
-      KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
+#       KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
     networks:
       C-Gobang:
         ipv4_address: 172.31.0.21
@@ -193,7 +193,7 @@ services:
       KAFKA_CFG_ZOOKEEPER_CONNECT: "C-Gobang-zookeeper:2181"
       KAFKA_CFG_LISTENERS: "PLAINTEXT://C-Gobang-kafka102:9092"
       KAFKA_CFG_ADVERTISED_LISTENERS: "PLAINTEXT://172.31.0.22:9092"
-      KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
+#       KAFKA_HEAP_OPTS: "-Xmx256m -Xms256m"
     networks:
       C-Gobang:
         ipv4_address: 172.31.0.22
