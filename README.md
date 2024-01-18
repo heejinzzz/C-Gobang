@@ -21,7 +21,7 @@
 ---
 
 ## 0. 直接使用
-点击链接 [C_Gobang.apk 下载](https://pan.xunlei.com/s/VNCyoSPqTtkvTCYFWerEarHbA1)，输入提取码：z3nf，下载 C_Gobang.apk 文件并安装到安卓设备上，直接开始使用 C-Gobang App。
+点击链接 [C_Gobang.apk 下载](https://pan.baidu.com/s/11_j83PQ9tCPPgVge9adINg?pwd=os1i)，下载 C_Gobang.apk 文件并安装到安卓设备上，直接开始使用 C-Gobang App。
 
 > 注：当前服务器可能会因过期而停止服务。对此，可以根据下述步骤部署自己的 C-Gobang 服务端，并编译生成与之配套的 C-Gobang 客户端。
 
